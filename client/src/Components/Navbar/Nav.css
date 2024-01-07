@@ -1,0 +1,68 @@
+* {
+          margin: 0;
+          padding: 0;
+}
+
+.nav {
+          width: 1200px;
+          margin: auto;
+          height: 67px;
+}
+
+.nav .conatiner {
+          display: flex;
+          justify-content: space-between;
+}
+
+.nav .conatiner .tab {
+          margin-top: 10px;
+          position: relative;
+}
+
+.nav .conatiner .tab img {
+          width: 64px;
+          height: 57px;
+}
+
+.nav .conatiner .tab .tabcontroller {
+          color: #fff;
+          text-decoration: none;
+          font-size: 30px;
+          cursor: pointer;
+}
+
+.nav .conatiner .tab:hover .avatartab {
+          display: block;
+}
+
+.nav .conatiner .tab .avatartab {
+          display: none;
+          background-color: #fff;
+          width: 300px;
+          position: absolute;
+          right: 0px;
+          border-radius: 10px;
+}
+
+.nav .conatiner .tab .avatartab .avatarcontroller {
+          padding: 20px;
+          cursor: pointer;
+}
+
+.nav .conatiner .tab .avatartab .avatarcontroller .avatartabtab {
+          color: black;
+          background-color: rgb(184, 66, 66);
+          margin-bottom: 20px;
+          border-radius: 10px;
+          padding: 20px;
+          font-size: 30px;
+          cursor: pointer;
+          transition: 0.3s ease;
+          word-wrap: break-word;
+}
+
+.nav .conatiner .tab .avatartab .avatarcontroller .avatartabtab:hover {
+          color: #fff;
+          transform: scale(1.01);
+          text-shadow: 0 0 10px;
+}
