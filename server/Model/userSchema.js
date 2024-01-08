@@ -30,6 +30,17 @@ const userschema = mongoose.Schema({
                               type: String,
                               required: true
                     }
+          }],
+          postData: [{
+                    title: {
+                              type: String,
+                    },
+                    description: {
+                              type: String
+                    },
+                    url: {
+                              type: String
+                    }
           }]
 });
 

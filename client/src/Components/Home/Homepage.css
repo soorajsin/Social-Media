@@ -33,3 +33,53 @@ body {
           transform: scale(1.06);
           box-shadow: 0 0 10px;
 }
+
+.home .howeContainer .show {
+          margin-top: 50px;
+          display: flex;
+          flex-wrap: wrap;
+}
+
+.home .howeContainer .show .show-data {
+          flex-wrap: wrap;
+          margin-right: 100px;
+          margin-bottom: 50px;
+          width: 300px;
+          background-color: #fff;
+          border-radius: 10px;
+          /* padding: 30px; */
+          transition: 0.3s ease;
+}
+
+.home .howeContainer .show .show-data:hover {
+          transform: scale(1.06);
+          box-shadow: 0 0 10px;
+}
+
+.home .howeContainer .show .show-data img {
+          width: 300px;
+          height: 300px;
+          border-radius: 10px;
+          margin-bottom: 20px;
+          transition: 0.3s ease;
+}
+
+.home .howeContainer .show .show-data img:hover {
+          transform: scale(1.1);
+          box-shadow: 0 0 10px;
+}
+
+.home .howeContainer .show .show-data p {
+          font-size: 20px;
+          padding: 20px;
+          word-break: break-all;
+          cursor: pointer;
+}
+
+.home .howeContainer .show .show-data .description {
+          display: none;
+}
+
+.home .howeContainer .show .show-data:hover .description {
+          display: block;
+}

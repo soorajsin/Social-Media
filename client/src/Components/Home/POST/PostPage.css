@@ -6,7 +6,7 @@
 .post {
           width: 1200px;
           margin: 100px auto;
-          background-color: rgb(150, 101, 101);
+          /* background-color: rgb(150, 101, 101); */
 }
 
 .post .postcontainer {
@@ -64,4 +64,22 @@
           border-top: none;
           background-color: #f5f5f5;
           border-radius: 10px;
+}
+
+.post .postcontainer .postForm button {
+          width: 355px;
+          font-size: 30px;
+          border: none;
+          background-color: #1976d2;
+          border-radius: 10px;
+          height: 40px;
+          cursor: pointer;
+          transition: 0.3s ease;
+          margin-top: 30px;
+}
+
+.post .postcontainer .postForm button:hover {
+          transform: scale(1.06);
+          box-shadow: 0 0 10px;
+          color: #fff;
 }

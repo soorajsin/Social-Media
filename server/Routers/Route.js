@@ -175,4 +175,104 @@ router.post("/signOut", authenticate, async (req, res) => {
 })
 
 
+router.post("/addPost", authenticate, async (req, res) => {
+          try {
+                    // console.log(req.body);
+                    const {
+                              title,
+                              description,
+                              url
+                    } = req.body;
+
+
+
+                    if (!title || !description || !url) {
+                              res.status(400).json({
+                                        msg: "No Data Provided!"
+                              })
+                    } else {
+                              // console.log(sendData);
+
+                              const user = req.getData;
+                              if (!user) {
+                                        res.status(400).json({
+                                                  msg: "Invalid User Token!"
+                                        })
+                              } else {
+                                        // console.log(user);
+
+                                        user.postData.push({
+                                                  title,
+                                                  description,
+                                                  url,
+                                        });
+
+                                        const updatedUser = await user.save();
+                                        // console.log(updatedUser);
+
+                                        res.status(201).json({
+                                                  status: 207,
+                                                  msg: "successfully added post",
+                                                  data: updatedUser
+                                        })
+                              }
+                    }
+          } catch (error) {
+                    res.status(400).json({
+                              msg: "Failed to add post"
+                    })
+          }
+})
+
+
+
+router.delete("/deletePost", authenticate, async (req, res) => {
+          try {
+                    // console.log(req.body);
+                    const {
+                              postDataId
+                    } = req.body;
+
+                    if (!postDataId) {
+                              res.status(400).json({
+                                        msg: "Please provide the id of the post you want to delete."
+                              })
+                    } else {
+                              const user = req.getData;
+                              if (!user) {
+                                        res.status(400).json({
+                                                  msg: "Invalid User Token"
+                                        })
+                              } else {
+                                        // console.log(user);
+
+                                        const entryField = user.postData.find((postData) => postData._id.toString() === postDataId);
+                                        // console.log(entryField);
+
+                                        if (!entryField) {
+                                                  res.status(400).json({
+                                                            field: 'field is required'
+                                                  })
+                                        } else {
+                                                  user.postData = user.postData.filter((postData) => postData._id.toString() !== postDataId);
+
+                                                  const updatedUser = await user.save();
+
+                                                  res.status(201).json({
+                                                            status: 202,
+                                                            msg: "successfully delete",
+                                                            data: updatedUser
+                                                  })
+                                        }
+                              }
+                    }
+          } catch (error) {
+                    res.status(400).json({
+                              msg: "Failed to delete post"
+                    })
+          }
+})
+
+
+
 module.exports = router;
