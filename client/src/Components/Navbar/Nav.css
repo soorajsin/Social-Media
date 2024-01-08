@@ -68,6 +68,17 @@
           word-wrap: break-word;
 }
 
+.nav .conatiner .tab .avatartab .avatarcontroller .avatartabtab .avatartabtabNab {
+          text-decoration: none;
+          color: black;
+}
+
+.nav .conatiner .tab .avatartab .avatarcontroller .avatartabtab:hover .avatartabtabNab {
+          color: #fff;
+          transform: scale(1.01);
+          text-shadow: 0 0 10px;
+}
+
 .nav .conatiner .tab .avatartab .avatarcontroller .avatartabtab:hover {
           color: #fff;
           transform: scale(1.01);

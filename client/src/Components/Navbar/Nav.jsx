@@ -103,10 +103,26 @@ const Nav = () => {
                     <div className="avatartabtab">
                       {userData ? userData.getData.email : ""}
                     </div>
-                    <div className="avatartabtab">Home</div>
-                    <div className="avatartabtab">Post</div>
-                    <div className="avatartabtab">Profile</div>
-                    <div className="avatartabtab">Login</div>
+                    <div className="avatartabtab">
+                      <NavLink to={"/home"} className={"avatartabtabNab"}>
+                        Home
+                      </NavLink>
+                    </div>
+                    <div className="avatartabtab">
+                      <NavLink to={"/post"} className={"avatartabtabNab"}>
+                        Post
+                      </NavLink>
+                    </div>
+                    <div className="avatartabtab">
+                      <NavLink to={"/profile"} className={"avatartabtabNab"}>
+                        Profile
+                      </NavLink>
+                    </div>
+                    <div className="avatartabtab">
+                      <NavLink to={"/"} className={"avatartabtabNab"}>
+                        Login
+                      </NavLink>
+                    </div>
                     <div className="avatartabtab" onClick={signOut}>
                       Log Out
                     </div>

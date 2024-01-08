@@ -1,9 +1,25 @@
-import React from 'react'
+import React from "react";
+import "./Homepage.css";
+import { useNavigate } from "react-router-dom";
 
 const Homepage = () => {
-  return (
-    <div>Homepage</div>
-  )
-}
+  const history = useNavigate();
+  const postTodata = () => {
+    history("/post");
+  };
 
-export default Homepage
+  return (
+    <>
+      <div className="home">
+        <div className="howeContainer">
+          <div className="add">
+            <button onClick={postTodata}>Post</button>
+          </div>
+          <div className="show"></div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Homepage;
