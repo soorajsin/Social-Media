@@ -1,9 +1,65 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Nav.css";
 import { AppBar, Avatar, Toolbar } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import apiURL from "../config";
+import { contextNavigate } from "../Context/ContextProvider";
 
 const Nav = () => {
+  const history = useNavigate();
+  const { userData, setUserData } = useContext(contextNavigate);
+  console.log(userData);
+  const url = apiURL.api;
+  const navbarValidate = async () => {
+    const token = localStorage.getItem("userDataToken");
+    // console.log(token);
+
+    const data = await fetch(`${url}/validator`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const res = await data.json();
+    // console.log(res);
+    if (res.status === 205) {
+      console.log(res);
+      setUserData(res);
+    } else {
+      console.log("not authorized");
+    }
+  };
+
+  useEffect(() => {
+    navbarValidate();
+  });
+
+  const signOut = async () => {
+    const token = await localStorage.getItem("userDataToken");
+    // console.log(token);
+
+    const data = await fetch(`${url}/signOut`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const res = await data.json();
+    // console.log(res);
+    if (res.status === 206) {
+      console.log(res);
+      localStorage.removeItem("userDataToken");
+      history("/");
+      window.location.reload();
+    } else {
+      alert("Log Out failed");
+    }
+  };
+
   return (
     <>
       <AppBar>
@@ -29,15 +85,23 @@ const Nav = () => {
                 </NavLink>
               </div>
               <div className="tab">
-                <Avatar className="tabcontroller"></Avatar>
+                <Avatar className="tabcontroller txt">
+                  {userData
+                    ? userData.getData.email.charAt(0).toUpperCase()
+                    : ""}
+                </Avatar>
                 <div className="avatartab">
                   <div className="avatarcontroller">
-                    <div className="avatartabtab">s@gmail.com</div>
+                    <div className="avatartabtab">
+                      {userData ? userData.getData.email : ""}
+                    </div>
                     <div className="avatartabtab">Home</div>
-                    <div className="avatartabtab">Login</div>
-                    <div className="avatartabtab">Profile</div>
                     <div className="avatartabtab">Post</div>
-                    <div className="avatartabtab">Log Out</div>
+                    <div className="avatartabtab">Profile</div>
+                    <div className="avatartabtab">Login</div>
+                    <div className="avatartabtab" onClick={signOut}>
+                      Log Out
+                    </div>
                   </div>
                 </div>
               </div>

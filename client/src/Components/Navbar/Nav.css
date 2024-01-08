@@ -31,6 +31,13 @@
           cursor: pointer;
 }
 
+.nav .conatiner .tab .txt {
+          color: rgb(194, 41, 41);
+          font-size: 30px;
+          background-color: #fff;
+          transition: 0.3s ease;
+}
+
 .nav .conatiner .tab:hover .avatartab {
           display: block;
 }

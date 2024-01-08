@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const userdb = require("../Model/userSchema");
 const bcrypt = require("bcryptjs");
+const authenticate = require("../Middleware/authentication");
 
 
 
@@ -118,6 +119,53 @@ router.post("/login", async (req, res) => {
                               msg: "Failed login"
                     })
                     // console.log(error);
+          }
+})
+
+router.get("/validator", authenticate, async (req, res) => {
+          // console.log("validate");
+          // console.log(req.getData);
+
+          if (req.getData) {
+                    res.status(201).json({
+                              status: 205,
+                              msg: "Successfully valid user",
+                              getData: req.getData
+                    })
+          } else {
+                    res.status(400).json({
+                              msg: "User is not valid"
+                    })
+          }
+})
+
+
+router.post("/signOut", authenticate, async (req, res) => {
+          try {
+                    // console.log(req.body);
+                    const user = req.getData;
+
+                    if (!user) {
+                              res.status(400).json({
+                                        msg: "user not found"
+                              })
+                    } else {
+                              // console.log(user);
+                              user.tokens = [];
+
+                              const updatedUser = await user.save();
+                              // console.log(updatedUser);
+
+                              res.status(201).json({
+                                        status: 206,
+                                        msg: "Signed out successfully!",
+                                        data: updatedUser
+                              })
+                    }
+          } catch (error) {
+                    res.status(400).json({
+                              msg: "sign out failed"
+                    })
           }
 })
 
