@@ -1,5 +1,5 @@
 const url = {
-          api: "http://localhost:4000"
+          api: "https://social-media-server-vert-two.vercel.app"
 }
 
 export default url;
