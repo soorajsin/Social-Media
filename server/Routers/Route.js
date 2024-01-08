@@ -144,13 +144,18 @@ router.post("/signOut", authenticate, async (req, res) => {
           try {
                     // console.log(req.body);
                     const user = req.getData;
+                    const tokenToRemove = req.headers.authorization;
 
-                    if (!user) {
+                    if (!user || !tokenToRemove) {
                               res.status(400).json({
                                         msg: "user not found"
                               })
                     } else {
-                              // console.log(user);
+
+                              // Remove the specific token
+                              //user.tokens = user.tokens.filter((token) => token._id !== tokenToRemove);
+
+                              // // console.log(user);
                               user.tokens = [];
 
                               const updatedUser = await user.save();

@@ -21,7 +21,7 @@ const authenticate = async (req, res, next) => {
                     } else {
                               // console.log(verifyToken);
 
-                              const getData = await userdb.findOne({
+                              const getData = await userdb.findById({
                                         _id: verifyToken._id
                               })
 

@@ -5,8 +5,8 @@ export const contextNavigate = createContext({
   setUserData: () => {},
 });
 
-const ContextProvider = (children) => {
-  const [userData, setUserData] = useState();
+const ContextProvider = ({children}) => {
+  const [userData, setUserData] = useState("");
   return (
     <>
       <contextNavigate.Provider value={{ userData, setUserData }}>

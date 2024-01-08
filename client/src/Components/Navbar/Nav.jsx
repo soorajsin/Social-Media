@@ -14,21 +14,25 @@ const Nav = () => {
     const token = localStorage.getItem("userDataToken");
     // console.log(token);
 
-    const data = await fetch(`${url}/validator`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+    try {
+      const data = await fetch(`${url}/validator`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
 
-    const res = await data.json();
-    // console.log(res);
-    if (res.status === 205) {
-      console.log(res);
-      setUserData(res);
-    } else {
-      console.log("not authorized");
+      const res = await data.json();
+      // console.log(res);
+      if (res.status === 205) {
+        // console.log(res);
+        setUserData(res);
+      } else {
+        console.log("not authorized");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -40,23 +44,27 @@ const Nav = () => {
     const token = await localStorage.getItem("userDataToken");
     // console.log(token);
 
-    const data = await fetch(`${url}/signOut`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+    try {
+      const data = await fetch(`${url}/signOut`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
 
-    const res = await data.json();
-    // console.log(res);
-    if (res.status === 206) {
-      console.log(res);
-      localStorage.removeItem("userDataToken");
-      history("/");
-      window.location.reload();
-    } else {
-      alert("Log Out failed");
+      const res = await data.json();
+      // console.log(res);
+      if (res.status === 206) {
+        console.log(res);
+        localStorage.removeItem("userDataToken");
+        history("/");
+        window.location.reload();
+      } else {
+        alert("Log Out failed");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
