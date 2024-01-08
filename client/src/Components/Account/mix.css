@@ -2,3 +2,90 @@
           margin: 0;
           padding: 0;
 }
+
+.register {
+          width: 1200px;
+          margin: 110px auto;
+}
+
+.register .registerContainer {
+          margin: auto;
+          width: 600px;
+          background-color: #fff;
+          border-radius: 10px;
+          transition: 0.3s ease;
+          margin-bottom: 50px;
+}
+
+.register .registerContainer:hover {
+          box-shadow: 0 0 10px;
+          transform: scale(1.06);
+}
+
+.register .registerContainer .resForm {
+          padding: 10px;
+          padding-left: 100px;
+}
+
+.register .registerContainer .resForm h1 {
+          word-spacing: 50px;
+          margin-top: 30px;
+          transition: 0.3s ease;
+}
+
+.register .registerContainer .resForm h1:hover {
+          transform: scale(1.06);
+          text-shadow: 0 0 10px;
+          padding-left: 10px;
+          color: rgb(223, 77, 77);
+}
+
+.register .registerContainer .resForm label {
+          font-size: 30px;
+}
+
+.register .registerContainer .resForm input {
+          width: 400px;
+          height: 40px;
+          padding-left: 10px;
+          border-radius: 10px;
+          border-top: none;
+          background-color: #f5f5f5;
+          font-size: 30px;
+          cursor: pointer;
+}
+
+.register .registerContainer .resForm button {
+          width: 400px;
+          height: 40px;
+          padding-left: 10px;
+          border-radius: 10px;
+          border: none;
+          background-color: #1976d2;
+          font-size: 30px;
+          cursor: pointer;
+          transition: 0.3s ease;
+}
+
+.register .registerContainer .resForm button:hover {
+          transform: scale(1.04);
+          box-shadow: 0 0 10pxs;
+          color: #fff;
+}
+
+.register .registerContainer .resForm p {
+          font-size: 20px;
+          margin-bottom: 30px;
+}
+
+.register .registerContainer .resForm p .switch {
+          padding-left: 8px;
+          cursor: pointer;
+          transition: 0.3s ease;
+}
+
+.register .registerContainer .resForm p .switch:hover {
+          transform: scale(1.06);
+          text-shadow: 0 0 10px;
+          color: rgb(226, 64, 64);
+}
