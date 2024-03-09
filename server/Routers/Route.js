@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const userdb = require("../Model/userSchema");
+const bcrypt = require("bcryptjs");
 
 router.post("/register", async (req, res) => {
   try {
@@ -44,13 +45,50 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // console.log(req.body);
-    const {email, password}=req.body;
-    if(!email || !password){
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400).json({
+        msg: "data not found"
+      });
+    } else {
+      const checkUser = await userdb.findOne({ email });
+      if (!checkUser) {
         res.status(400).json({
-            msg:"data not found"
-        })
-    }else{
-        
+          status: 201,
+          msg: "user not found"
+        });
+      } else {
+        const checkPassword = await bcrypt.compare(
+          password,
+          checkUser.password
+        );
+        if (!checkPassword) {
+          res.status(400).json({
+            status: 202,
+            msg: "password not matched"
+          });
+        } else {
+          // console.log(checkPassword);
+
+          //generate token
+          const token = await checkUser.generateToken();
+          // console.log(token);
+
+          //generate cookie
+          res.cookie("auth_token", token, {
+            httpOnly: true,
+            secure: true,
+            maxAge: 24 * 60 * 60 * 1000
+          });
+
+          const result = { token, checkUser };
+          res.status(201).json({
+            status: 203,
+            msg: "User Login succesfully done",
+            data: result
+          });
+        }
+      }
     }
   } catch (error) {
     res.status(400).json({

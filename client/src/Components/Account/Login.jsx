@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./mix.css";
 import apiURL from "../config";
 
 const Register = () => {
   const api = apiURL.url;
-  // const pageNavigate = useNavigate();
+  const pageNavigate = useNavigate();
   const [sendData, setSendData] = useState({
     email: "",
     password: ""
@@ -40,14 +40,17 @@ const Register = () => {
         body: JSON.stringify(sendData)
       });
       const res = await data.json();
-      console.log(res);
-      // if (res.status === 201) {
-      //   alert("User Already Exist");
-      //   pageNavigate("/");
-      // } else if (res.status === 202) {
-      //   console.log(res);
-      //   pageNavigate("/");
-      // }
+      // console.log(res);
+      if (res.status === 201) {
+        alert("Email is not Exist");
+      } else if (res.status === 202) {
+        alert("Password not matched");
+      } else if (res.status === 203) {
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        pageNavigate("/home");
+        window.location.reload();
+      }
     }
   };
 
