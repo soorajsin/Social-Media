@@ -41,4 +41,23 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  try {
+    // console.log(req.body);
+    const {email, password}=req.body;
+    if(!email || !password){
+        res.status(400).json({
+            msg:"data not found"
+        })
+    }else{
+        
+    }
+  } catch (error) {
+    res.status(400).json({
+      msg: "login failed",
+      error: error
+    });
+  }
+});
+
 module.exports = router;
