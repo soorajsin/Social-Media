@@ -12,12 +12,42 @@ const PostPage = () => {
   });
 
   const changeData = (e) => {
-    setSendData({
-      ...sendData,
-      [e.target.name]: e.target.value
-    });
+    if (e.target.name === "pimg") {
+      // If the input is for an image file
+      setSendData({
+        ...sendData,
+        pimg: e.target.files[0] // Update pimg to be the file object
+      });
+    } else {
+      // For text inputs
+      setSendData({
+        ...sendData,
+        [e.target.name]: e.target.value
+      });
+    }
   };
+
   console.log(sendData);
+
+  // const submitToPost = async (e) => {
+  //   e.preventDefault();
+
+  //   const { title, description, pimg } = sendData;
+  //   if (!title || !description || !pimg) {
+  //     alert("Please enter all fields");
+  //   } else {
+  //     console.log("post");
+  //     const data = await fetch(`${api}/post`, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(sendData)
+  //     });
+  //     const res = await data.json();
+  //     console.log(res);
+  //   }
+  // };
 
   const submitToPost = async (e) => {
     e.preventDefault();
@@ -27,15 +57,22 @@ const PostPage = () => {
       alert("Please enter all fields");
     } else {
       console.log("post");
-      const data = await fetch(`${api}/post`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(sendData)
-      });
-      const res = await data.json();
-      console.log(res);
+
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+      formData.append("pimg", pimg);
+
+      try {
+        const response = await fetch(`${api}/post`, {
+          method: "POST",
+          body: formData // Use formData instead of JSON.stringify(sendData)
+        });
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error posting data:", error);
+      }
     }
   };
 

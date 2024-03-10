@@ -2,6 +2,19 @@ const express = require("express");
 const router = new express.Router();
 const userdb = require("../Model/userSchema");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
+
+// Set up Multer for file upload
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads/"); // Destination directory for storing uploaded files
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); // Use the original filename for the uploaded file
+  }
+});
+
+const upload = multer({ storage: storage });
 
 router.post("/register", async (req, res) => {
   try {
@@ -98,12 +111,20 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/post", async (req, res) => {
+router.post("/post", upload.single("pimg"), async (req, res) => {
   try {
-    console.log(req.body);
+    // Check if req.file is defined before accessing its properties
+    if (!req.file) {
+      throw new Error("No file uploaded");
+    }
+
+    const { title, description } = req.body;
+    const pimgPath = req.file.path; // Actual file path on the server
+    console.log(pimgPath);
   } catch (error) {
     res.status(400).json({
-      msg: "failed to post"
+      msg: "failed to post",
+      error: error.message // Send the error message to the client
     });
   }
 });
