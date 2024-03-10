@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.profile {
+  width: 1200px;
+  margin: 100px auto;
+}
+.profile .proCon {
+  width: 1200px;
+  margin: auto;
+  padding: 10px;
+}
+
+.profile .proCon .post button {
+  width: 200px;
+  height: 40px;
+  font-size: 30px;
+  color: #ffff;
+  background-color: rgb(34, 85, 196);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.profile .proCon .post button:focus {
+  background-color: rgb(71, 161, 71);
+}
